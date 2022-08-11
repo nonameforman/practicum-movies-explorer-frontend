@@ -1,0 +1,27 @@
+.nav-tab {
+    display: flex;
+    margin: 0 auto;
+    gap: 40px;
+    max-width: 1280px;
+    align-items: center;
+    background-color: #272727;
+    justify-content: center;
+}
+
+.nav-tab__link {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    color: white;
+    margin: 24px 0;
+}
+
+@media screen and (max-width: 449px) {
+    .nav-tab {
+        gap: 24px;
+    }
+
+    .nav-tab__link {
+        font-size: 11px;
+    }
+}

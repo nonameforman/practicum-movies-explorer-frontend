@@ -1,0 +1,31 @@
+.login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login__container {
+    display: flex;
+    flex-direction: column;
+    max-width: 396px;
+    padding: 70px 0;
+}
+
+.login__form-block {
+    display: flex;
+    flex-direction: column;
+    min-height: 577px;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+    .login__container {
+        max-width: 260px;
+        padding: 56px 0 30px;
+    }
+
+    .login__header {
+        margin: 0 auto;
+    }
+}
