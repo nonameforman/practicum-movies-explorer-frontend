@@ -7,13 +7,13 @@ import { Portfolio } from '../Landing/Portfolio/Portfolio.js';
 
 export const Landing = () => {
     return (
-        <>
+        <main className='main'>
             <Promo />
             <NavTab />
             <AboutProject />
             <Techs />
             <AboutMe />
             <Portfolio />
-        </>
+        </main>
     );
 }

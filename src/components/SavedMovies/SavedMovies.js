@@ -13,13 +13,13 @@ export const SavedMovies = () => {
     }
 
     return (
-        <>
+        <main className='main'>
             <SearchForm>
                 <TumblerFilter />
             </SearchForm>
             <MoviesCardList>
                 {getMovies(movies, 0)}
             </MoviesCardList>
-        </>
+        </main>
     );
 }
