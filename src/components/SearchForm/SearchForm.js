@@ -4,7 +4,7 @@ export const SearchForm = ({children}) => {
     return (
         <section className='search'>
             <form className='search__form'>
-                <input className='search__input' placeholder='Фильм' />
+                <input className='search__input' placeholder='Фильм' required/>
                 <button className='search__button opacity transition'>
                     <div className='search__button-line'></div>
                     <div className='search__button-arrow'></div>

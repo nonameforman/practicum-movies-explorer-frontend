@@ -24,6 +24,11 @@
     border-radius: 8px;
     padding: 16px 0 16px 20px;
     outline: none;
+    border: 1px #2F2F2F solid;
+}
+
+.search__input:focus {
+    border: 1px #4285F4 solid;
 }
 
 .search__button {
