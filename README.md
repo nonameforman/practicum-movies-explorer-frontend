@@ -1,3 +1,3 @@
 
 PULL REQ
-https://github.com/nonameforman/movies-explorer-frontend/pull/3
+https://github.com/nonameforman/movies-explorer-frontend/pull/2
