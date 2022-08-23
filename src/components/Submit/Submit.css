@@ -4,12 +4,17 @@
     margin: 0 auto;
 }
 
-.submit__error {
+.submit__status {
     margin: 0 auto;
     font-size: 11px;
     font-weight: 400;
     line-height: 13px;
     color: #FF004C;
+    text-align: center;
+}
+
+.submit__status_succes {
+    color: #2BE080;
 }
 
 .submit__button {
@@ -24,6 +29,12 @@
     background-color: #3456F3;
     border: none;
     border-radius: 3px;
+}
+
+.submit__button:disabled {
+    cursor: default;
+    background-color: #F8F8F8;
+    color: #C2C2C2;
 }
 
 .submit__link-text {

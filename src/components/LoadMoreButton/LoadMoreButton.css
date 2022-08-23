@@ -1,0 +1,25 @@
+.load-more__button {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    border: none;
+    width: 1140px;
+    margin: 0 auto 80px;
+    color: white;
+    background-color: #2F2F2F;
+    padding: 10px 0;
+    border-radius: 6px;
+}
+
+@media screen and (max-width: 1279px) {
+    .load-more__button {
+        width: 708px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .load-more__button {
+        width: 300px;
+    }
+}

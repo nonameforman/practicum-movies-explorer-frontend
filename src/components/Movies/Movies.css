@@ -1,0 +1,16 @@
+.main__error {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: center;
+    grid-column: 1 / 4;
+    width: 600px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+    .main__error {
+        font-size: 12px;
+        width: 280px;
+    }
+}

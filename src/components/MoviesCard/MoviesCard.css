@@ -7,6 +7,10 @@
     height: 201px;
 }
 
+.card__container_sm:hover .card__delete-button {
+    display: block;
+}
+
 .card__image {
     width: 100%;
     height: 100%;
@@ -43,7 +47,12 @@
     align-items: center;
 }
 
-.card__checkmark {
+.card__delete-button_cross {
+    display: none;
+    background-color: #F5F5F5;
+}
+
+.card__symbol {
     width: 8px;
     height: 4.5px;
     display: flex;
@@ -52,6 +61,11 @@
     background-image: url(../../images/checkmark.svg);
     background-position: center;
     background-size: cover;
+}
+
+.card__symbol_cross {
+    height: 8px;
+    background-image: url(../../images/cross.svg);
 }
 
 .card__description {
@@ -83,6 +97,7 @@
     line-height: 10px;
     margin: 0;
     color: #8B8B8B;
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 1279px) {
