@@ -1,12 +1,15 @@
+# Movies-explorer-frontend  
 
-PULL REQ
-https://github.com/nonameforman/movies-explorer-frontend/pull/2
+## Links  
 
-front
-movies-diplom.nomoredomains.xyz
+### Pull request  
+https://github.com/nonameforman/movies-explorer-frontend/pull/2  
 
-back
-api.movies-diplom.nomoredomains.xyz
+### Frontend  
+https://movies-diplom.nomoredomains.xyz  
 
-pub ip
-51.250.88.158
+### Backend  
+https://api.movies-diplom.nomoredomains.xyz  
+
+### IP  
+51.250.88.158  
