@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../utils/hooks.js';
 import api from '../../utils/MainApi';
-import { token } from '../../utils/constants';
-
 
 export const Profile = () => {
 
@@ -23,7 +21,7 @@ export const Profile = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (values.name && values.email) {
-            api.editProfile(values, token).then((data) => {
+            api.editProfile(values, localStorage.getItem('token')).then((data) => {
                 setUserContext(data);
                 setStatus(true);
                 setTextStatus('Профиль обновлен');

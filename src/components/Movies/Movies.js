@@ -9,7 +9,6 @@ import { filterFilms } from '../../utils/helpers.js';
 import { Preloader } from '../Preloader/Preloader.js';
 import { useFetching, useLimit } from '../../utils/hooks.js';
 import api from '../../utils/MainApi';
-import { token } from '../../utils/constants';
 
 const displayWidth = window.innerWidth;
 
@@ -37,11 +36,11 @@ export const Movies = () => {
                 setIsSearched(true)
             })
             .catch((err) => {
-                console.log(`Ошибка при получении фильмов с сервера ${err}`)
+                console.log(`Ошибка при получении фильмов из фильмотеки ${err}`)
                 setErrMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
             });
         
-        await api.getSavedMovies(token)
+        await api.getSavedMovies(localStorage.getItem('token'))
             .then(res => {
                 const idMovies = res.reduce((prev, item) => {
                     return {...prev, [item.movieId]: item._id}
@@ -49,7 +48,7 @@ export const Movies = () => {
                 setSavedIdMovies(idMovies)
                 })
             .catch((err) => {
-                    console.log(`Ошибка при получении фильмов с сервера ${err}`)
+                console.log(`Ошибка при получении фильмов с сервера ${err}`)
             });
     });
     
@@ -114,8 +113,8 @@ export const Movies = () => {
                                     duration={movie.duration}
                                     isSaved={savedIdMovies[movie.id]}
                                     key={movie.id}
-                                    handleSave={() => handleSave(movie, token)}
-                                    handleDelete={() => handleDelete(savedIdMovies[movie.id], token)}
+                                    handleSave={() => handleSave(movie, localStorage.getItem('token'))}
+                                    handleDelete={() => handleDelete(savedIdMovies[movie.id], localStorage.getItem('token'))}
                                     trailerLink={movie.trailerLink}
                                 />
                             ))}

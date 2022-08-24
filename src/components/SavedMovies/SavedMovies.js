@@ -6,7 +6,6 @@ import { Preloader } from '../Preloader/Preloader.js';
 import { useFetching } from '../../utils/hooks.js';
 import { filterFilms } from '../../utils/helpers.js';
 import api from '../../utils/MainApi.js';
-import { token } from '../../utils/constants';
 
 export const SavedMovies = () => {
     const [filter, setFilter] = useState({ query: '', shortFilm: false });
@@ -14,7 +13,7 @@ export const SavedMovies = () => {
     const [savedAllMovies, setSavedAllMovies] = useState([]);
 
         const [fetchSavedMovies, isLoading] = useFetching(async () => {
-            await api.getSavedMovies(token)
+            await api.getSavedMovies(localStorage.getItem('token'))
                 .then(res => {
                     setSavedAllMovies(res)
                     setSavedFilteredMovies(res)
@@ -56,7 +55,7 @@ export const SavedMovies = () => {
                             duration={movie.duration}
                             key={movie.movieId}
                             isSaved={true}
-                            handleDelete={() => handleDelete(movie._id, token)}
+                            handleDelete={() => handleDelete(movie._id, localStorage.getItem('token'))}
                             trailerLink={movie.trailerLink}
                     />))}
                 </MoviesCardList>
