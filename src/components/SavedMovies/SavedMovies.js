@@ -1,3 +1,4 @@
+import './SavedMovies.css'
 import { useState, useEffect } from 'react';
 import { SearchForm } from '../SearchForm/SearchForm.js';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList.js';
@@ -11,15 +12,18 @@ export const SavedMovies = () => {
     const [filter, setFilter] = useState({ query: '', shortFilm: false });
     const [savedFilteredMovies, setSavedFilteredMovies] = useState([]);
     const [savedAllMovies, setSavedAllMovies] = useState([]);
+    const [errMessage, setErrMessage] = useState('');
 
         const [fetchSavedMovies, isLoading] = useFetching(async () => {
             await api.getSavedMovies(localStorage.getItem('token'))
                 .then(res => {
                     setSavedAllMovies(res)
                     setSavedFilteredMovies(res)
+                    !savedFilteredMovies.length && setErrMessage('Ничего не найдено');
             })
             .catch((err) => {
-                console.log(`Ошибка при получении фильмов с сервера ${err}`)
+                console.log(`Ошибка при получении фильмов с сервера ${err}`);
+                setErrMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
             });
         });
     
@@ -52,6 +56,7 @@ export const SavedMovies = () => {
                 <Preloader />
                 :
                 <MoviesCardList>
+                    {!Boolean(savedFilteredMovies.length) && <p className='main__error'>{errMessage}</p>}
                     {savedFilteredMovies.map(movie => (
                         <MoviesCard
                             name={movie.nameRU}
