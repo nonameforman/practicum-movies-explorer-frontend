@@ -1,4 +1,5 @@
-import { getMovies } from '../utils/MoviesApi'
+import { SHORT_FILM_DURATION } from './constants';
+import { getMovies } from '../utils/MoviesApi';
 
 export const convertTime = (min) => {
     if (min < 60) {
@@ -14,7 +15,7 @@ export const filterFilms = (movies, filter, limit) => {
     let filteredMovies = []
 
     if (filter.shortFilm) {
-        filteredMovies = movies.filter((movie) => movie.duration <= 40);
+        filteredMovies = movies.filter((movie) => movie.duration <= SHORT_FILM_DURATION);
     } else {
         filteredMovies = [...movies]
     }

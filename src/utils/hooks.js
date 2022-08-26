@@ -1,4 +1,11 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
+import {
+  DISPLAYED_MOVIES_FROM_1280,
+  DISPLAYED_MOVIES_FROM_768_TO_1279,
+  DISPLAYED_MOVIES_FROM_320_TO_767,
+  ADDED_MOVIES_FROM_1280,
+  ADDED_MOVIES_FROM_320_TO_1279
+} from './constants';
 
 export function useFormWithValidation(init = {}) {
     const [values, setValues] = useState(init);
@@ -48,11 +55,11 @@ export const useLimit = (initial) => {
   
   const func = (displayWidth) => {
     if (displayWidth >= 1280) {
-    return [12,  3]
+    return [DISPLAYED_MOVIES_FROM_1280, ADDED_MOVIES_FROM_1280]
     } else if (displayWidth >= 768) {
-      return [8, 2]
+      return [DISPLAYED_MOVIES_FROM_768_TO_1279, ADDED_MOVIES_FROM_320_TO_1279]
     } else {
-      return [5, 2]
+      return [DISPLAYED_MOVIES_FROM_320_TO_767, ADDED_MOVIES_FROM_320_TO_1279]
     }
   }
   const initialLimit = func(initial)[0]
