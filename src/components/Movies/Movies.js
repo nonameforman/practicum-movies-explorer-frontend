@@ -7,7 +7,7 @@ import { LoadMoreButton } from '../LoadMoreButton/LoadMoreButton.js';
 import { getMovies } from '../../utils/MoviesApi.js';
 import { filterFilms } from '../../utils/helpers.js';
 import { Preloader } from '../Preloader/Preloader.js';
-import { useFetching, useLimit, useLocalStorage} from '../../utils/hooks.js';
+import { useFetching, useLimit, useLocalStorage } from '../../utils/hooks.js';
 import api from '../../utils/MainApi';
 
 const displayWidth = window.innerWidth;
