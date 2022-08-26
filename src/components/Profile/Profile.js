@@ -1,5 +1,5 @@
 import './Profile.css';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../utils/hooks.js';
@@ -16,7 +16,19 @@ export const Profile = () => {
     const [status, setStatus] = useState(false);
     const [textStatus, setTextStatus] = useState('');
 
-    const { values, handleChange, isValid } = useFormWithValidation({name: userContext.name, email: userContext.email});
+    const [disabledButton, setDisabledButton] = useState(true);
+
+    const { values, handleChange, isValid, resetForm } = useFormWithValidation({name: userContext.name, email: userContext.email});
+
+    useEffect(() => {
+        resetForm({name: userContext.name, email: userContext.email});
+    }, [userContext]);
+
+    useEffect(() => {
+        const status1 = ((values.name !== userContext.name) || (values.email !== userContext.email)) && !isValid;
+        const status2 = (values.name === userContext.name) && (values.email === userContext.email);
+        setDisabledButton(status1 || status2);
+    }, [isValid, userContext, values]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,10 +38,11 @@ export const Profile = () => {
                 setStatus(true);
                 setTextStatus('Профиль обновлен');
                 setTimeout(() => {
-                    setTextStatus('');
                     setIsEdit(false);
+                    setTextStatus('');
                 }, 2000);
             }).catch((err) => {
+                setStatus(false);
                 setTextStatus(`${err}`)
             })
         }
@@ -84,7 +97,7 @@ export const Profile = () => {
                 <button 
                     className='profile__save-button opacity transition'
                     type='submit'
-                    disabled={!isValid}
+                    disabled={disabledButton}
                     >
                     Сохранить
                 </button>
