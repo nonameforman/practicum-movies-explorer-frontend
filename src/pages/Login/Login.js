@@ -25,9 +25,7 @@ export const Login = ({ handleLogin }) => {
                     handleLogin();
                     setStatus(true);
                     setTextStatus('Вход выполнен. Идем смотреть фильмы ^_^');
-                    setTimeout(() => {
-                        navigate('/movies')
-                    }, 2500);
+                    navigate('/movies');
             }).catch((err) => {
                 console.error(err);
                 setStatus(false);

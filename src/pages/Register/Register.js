@@ -27,10 +27,8 @@ export const Register = ({ handleLogin }) => {
                     setTextStatus('Регистрацию прошли. По машинам...');
                     authorize(email, password).then(() => {
                         handleLogin();
+                        navigate('/movies');
                     })
-                    setTimeout(() => {
-                        navigate('/movies')
-                    }, 2500);
                 }
             }).catch((err) => {
                 console.error(err);

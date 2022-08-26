@@ -9,6 +9,7 @@ import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { NotFound } from '../NotFound/NotFound';
 import { ProtectedRoutes } from '../../components/ProtectedRoutes';
+import { AuthRoutes } from '../../components/AuthRoutes';
 import { getInfo } from '../../utils/auth';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -44,10 +45,12 @@ const App = () => {
     <div className='App'>
       <CurrentUserContext.Provider value={{userContext, setUserContext}}>
         <Routes>
-            <Route path='/' element={<LandingPage loggedIn={loggedIn}  />} />
-          <Route path='/signin' element={<Login handleLogin={handleLogin}/>} />
-          <Route path='/signup' element={<Register handleLogin={handleLogin}/>} />
-          <Route path='*' element={<NotFound />} />
+            <Route path='/' element={<LandingPage loggedIn={loggedIn} />} />
+            <Route path='*' element={<NotFound />} />
+            <Route element={<AuthRoutes loggedIn={loggedIn} />} >
+              <Route path='/signin' element={<Login handleLogin={handleLogin} />} />
+              <Route path='/signup' element={<Register handleLogin={handleLogin} />} />
+            </Route>
           <Route element={<ProtectedRoutes loggedIn={loggedIn} />} >
             <Route path='/movies' element={<MoviesPage />} />
             <Route path='/saved-movies' element={<SavedMoviesPage />} />
