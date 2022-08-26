@@ -50,6 +50,9 @@ export const Profile = () => {
 
     const logOut = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('filter');
+        localStorage.removeItem('idMovies');
+        localStorage.removeItem('movies');
         setUserContext({});
         navigate('/');
     }

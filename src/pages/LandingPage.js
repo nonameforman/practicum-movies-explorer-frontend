@@ -4,7 +4,7 @@ import { MoviesNavigation } from '../components/Header/MoviesNavigation/MoviesNa
 import { Landing } from '../components/Landing/Landing.js';
 import { Footer } from '../components/Footer/Footer.js';
 
-export const LandingPage = ({loggedIn}) => {
+export const LandingPage = ({ loggedIn }) => {
     return (
         <>
             <Header>

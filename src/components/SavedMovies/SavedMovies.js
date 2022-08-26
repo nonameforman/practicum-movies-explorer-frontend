@@ -45,7 +45,8 @@ export const SavedMovies = () => {
 
     return (
         <main className='main'>
-            <SearchForm filter={filter} handleSubmit={handleSubmit} setFilter={setFilter}/>
+            <SearchForm filter={filter} handleSubmit={handleSubmit} setFilter={setFilter} 
+            setFilteredMovies={setSavedFilteredMovies} allMovies={savedAllMovies} limit={savedAllMovies.length}/>
             {isLoading
                 ?
                 <Preloader />

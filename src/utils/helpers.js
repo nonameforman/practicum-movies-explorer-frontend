@@ -11,17 +11,20 @@ export const convertTime = (min) => {
     }
 }
 
-export const filterFilms = (movies, filter, limit) => {
-    let filteredMovies = []
+export const filterFilms = (movies, filter) => {
+    let filteredMovies = filterIsShort(movies, filter.shortFilm)
 
-    if (filter.shortFilm) {
-        filteredMovies = movies.filter((movie) => movie.duration <= SHORT_FILM_DURATION);
-    } else {
-        filteredMovies = [...movies]
-    }
-    
     return filteredMovies.filter((movie) =>
         movie.nameRU.toLowerCase().includes(filter.query.toLowerCase()))
+}
+
+export const filterIsShort = (movies, isShort) => {
+    let filteredMovies = [...movies]
+
+    if (isShort) {
+        filteredMovies = movies.filter((movie) => movie.duration <= SHORT_FILM_DURATION);
+    } 
+    return filteredMovies;
 }
 
 export const getCorrectMoviesList = async () => {

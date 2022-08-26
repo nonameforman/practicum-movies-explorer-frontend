@@ -1,10 +1,12 @@
 import './SearchForm.css';
 import { TumblerFilter } from '../TumblerFilter/TumblerFilter';
+import { filterIsShort } from '../../utils/helpers';
 
-export const SearchForm = ({ handleSubmit, setFilter, filter }) => {
+export const SearchForm = ({ handleSubmit, setFilter, filter, setFilteredMovies, allMovies, limit }) => {
 
     const handleTumbler = (e) => {
         setFilter({...filter, shortFilm: e.target.checked})
+        setFilteredMovies(filterIsShort(allMovies, e.target.checked).slice(0, limit))
     }
 
     const handleQuery = (e) => {
@@ -21,7 +23,7 @@ export const SearchForm = ({ handleSubmit, setFilter, filter }) => {
                 </button>
             </form>
             <div className='search__filter'>
-                <TumblerFilter handleTumbler={handleTumbler}/>
+                <TumblerFilter isChecked={filter.shortFilm} handleTumbler={handleTumbler}/>
                 <p className='search__filter-name'>
                     Короткометражки
                 </p>

@@ -15,7 +15,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 const App = () => {
 
-  const [loggedIn, setloggedIn] = useState(false);
+  const [loggedIn, setloggedIn] = useState(true);
 
   const location = useLocation();
 

@@ -7,30 +7,28 @@ import { LoadMoreButton } from '../LoadMoreButton/LoadMoreButton.js';
 import { getMovies } from '../../utils/MoviesApi.js';
 import { filterFilms } from '../../utils/helpers.js';
 import { Preloader } from '../Preloader/Preloader.js';
-import { useFetching, useLimit } from '../../utils/hooks.js';
+import { useFetching, useLimit, useLocalStorage} from '../../utils/hooks.js';
 import api from '../../utils/MainApi';
 
 const displayWidth = window.innerWidth;
 
 export const Movies = () => {
     
-    const [filter, setFilter] = useState({ query: '', shortFilm: false });
+    const [filter, setFilter] = useLocalStorage('filter', { query: '', shortFilm: false });
     const [filteredMovies, setFilteredMovies] = useState([]);
-    const [savedIdMovies, setSavedIdMovies] = useState({});
+    const [savedIdMovies, setSavedIdMovies] = useLocalStorage('idMovies', {});
     const [isSearched, setIsSearched] = useState(false);
     
-    const [allMovies, setAllMovies] = useState([]);
+    const [allMovies, setAllMovies] = useLocalStorage('movies', []);
     const [limit, countAddedCard, onChangeLimit] = useLimit(displayWidth);
-
-    const [countMovies, setCountMovies] = useState(0);
     const [errMessage, setErrMessage] = useState('');
-    
+
     const [fetchMovies, isLoading] = useFetching(async () => {
+
         await getMovies()
             .then(res => {
                 const allFilteredFilms = filterFilms(res, filter)
                 setAllMovies(allFilteredFilms)
-                setCountMovies(allFilteredFilms.length)
                 !allFilteredFilms.length && setErrMessage('Ничего не найдено')
                 setFilteredMovies(allFilteredFilms.slice(0, limit))
                 setIsSearched(true)
@@ -96,15 +94,20 @@ export const Movies = () => {
         return () => window.removeEventListener('resize', onChangeSize)
     }, [onChangeLimit])
 
+    useEffect(() => {
+        const allFilteredFilms = filterFilms(allMovies, filter)
+        setFilteredMovies(allFilteredFilms.slice(0, limit))
+    }, [])
+
     return (
         <main className='main'>
-            <SearchForm handleSubmit={handleSubmit} setFilter={setFilter} filter={filter} />
+            <SearchForm handleSubmit={handleSubmit} setFilter={setFilter} filter={filter} setFilteredMovies={setFilteredMovies} allMovies={allMovies} limit={limit}/>
             {isLoading
                 ?
                 <Preloader />
                 :
                 <>
-                    {isSearched &&
+                    {(isSearched || filteredMovies.length) &&
                         <>
                         <MoviesCardList>
                             {!Boolean(filteredMovies.length) && <p className='main__error'>{errMessage}</p>}
@@ -121,7 +124,7 @@ export const Movies = () => {
                                 />
                             ))}
                         </MoviesCardList>
-                        {filteredMovies.length < countMovies && <LoadMoreButton onClick={handleLoadMore} />}
+                        {filteredMovies.length < allMovies.length && <LoadMoreButton onClick={handleLoadMore} />}
                         </>
                     }
                 </>

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import {
   DISPLAYED_MOVIES_FROM_1280,
   DISPLAYED_MOVIES_FROM_768_TO_1279,
@@ -76,3 +76,14 @@ export const useLimit = (initial) => {
   return [limit, countAddedCard, onChangeLimit]
 }
 
+export const useLocalStorage = (key, init) => {
+  const initState = JSON.parse(localStorage.getItem(key)) || init;
+  const [state, setState] = useState(initState);
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state))
+  }, [state]);
+
+  return [state, setState]
+
+}
