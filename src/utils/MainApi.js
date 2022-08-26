@@ -43,7 +43,6 @@ class Api {
 
 
     saveMovie(movie, token) {
-
         return fetch(`${this._address}/movies`, {
             method: 'POST',
             headers: {

@@ -62,7 +62,9 @@ export const Movies = () => {
             .then(res => {
                     setSavedIdMovies(prev => ({...prev, [res.movieId]: res._id}))
                 })
-            .catch(err => console.log(err))
+                .catch((err) => {
+                    console.log(`Ошибка при добавлении фильма в избранное ${err}`)
+                });
         }
     
 

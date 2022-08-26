@@ -38,6 +38,9 @@ export const SavedMovies = () => {
                 setSavedFilteredMovies(prev => prev.filter(item => item._id !== id))
                 setSavedAllMovies(prev => prev.filter(item => item._id !== id))
             })
+            .catch((err) => {
+                console.log(`Ошибка при удалении фильма ${err}`)
+            })
     }
 
     return (
