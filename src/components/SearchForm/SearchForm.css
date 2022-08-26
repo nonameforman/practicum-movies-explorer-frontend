@@ -42,6 +42,10 @@
     align-items: center;
 }
 
+.search__button:disabled {
+    cursor: default;
+}
+
 .search__button-line {
     background-image: url(../../images/line.svg);
     width: 2px;

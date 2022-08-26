@@ -53,6 +53,7 @@ export const Profile = () => {
         localStorage.removeItem('filter');
         localStorage.removeItem('idMovies');
         localStorage.removeItem('movies');
+        localStorage.removeItem('beats-films');
         setUserContext({});
         navigate('/');
     }

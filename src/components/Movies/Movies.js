@@ -14,6 +14,7 @@ const displayWidth = window.innerWidth;
 
 export const Movies = () => {
     
+    const [isDisabledSearching, setIsDisabledSearching] = useState(false);
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [isSearched, setIsSearched] = useState(false);
     const [errMessage, setErrMessage] = useState('');
@@ -24,11 +25,12 @@ export const Movies = () => {
     const [initialMovies, setInitialFilms] = useLocalStorage('beats-films', []);
 
     const [fetchMovies, isLoading] = useFetching(async () => {
-
+        setIsDisabledSearching(true)
         if (initialMovies.length) {
             const allFilteredFilms = filterFilms(initialMovies, filter)
             setAllMovies(allFilteredFilms)
             setFilteredMovies(allFilteredFilms.slice(0, limit))
+            setIsDisabledSearching(false)
         } else {
             await getMovies()
                 .then(res => {
@@ -42,7 +44,8 @@ export const Movies = () => {
                 .catch((err) => {
                             console.log(`Ошибка при получении фильмов из фильмотеки ${err}`)
                             setErrMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-                        });
+                })
+                .finally(() => setIsDisabledSearching(false))
                     await api.getSavedMovies(localStorage.getItem('token'))
                         .then(res => {
                             const idMovies = res.reduce((prev, item) => {
@@ -58,8 +61,8 @@ export const Movies = () => {
     });
     
     const handleSubmit = (e) => {
-        e.preventDefault()
-        fetchMovies()
+        e.preventDefault();
+        fetchMovies();
     }
 
     const handleSave = (movie, token) => {
@@ -108,7 +111,7 @@ export const Movies = () => {
 
     return (
         <main className='main'>
-            <SearchForm handleSubmit={handleSubmit} setFilter={setFilter} filter={filter} setFilteredMovies={setFilteredMovies} allMovies={allMovies} limit={limit}/>
+            <SearchForm handleSubmit={handleSubmit} setFilter={setFilter} filter={filter} setFilteredMovies={setFilteredMovies} allMovies={allMovies} limit={limit} isDisabledSearching={isDisabledSearching}/>
             {isLoading
                 ?
                 <Preloader />
