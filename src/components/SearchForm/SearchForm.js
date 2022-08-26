@@ -16,7 +16,14 @@ export const SearchForm = ({ handleSubmit, setFilter, filter, setFilteredMovies,
     return (
         <section className='search'>
             <form className='search__form' onSubmit={handleSubmit}>
-                <input className='search__input' placeholder='Фильм' name='search' required onChange={handleQuery} value={filter.query}/>
+                <input
+                    className='search__input'
+                    placeholder='Фильм'
+                    name='search'
+                    required
+                    onChange={handleQuery}
+                    value={filter.query}/>
+                    
                 <button className='search__button opacity transition'>
                     <div className='search__button-line'></div>
                     <div className='search__button-arrow'></div>

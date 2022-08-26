@@ -14,40 +14,47 @@ const displayWidth = window.innerWidth;
 
 export const Movies = () => {
     
-    const [filter, setFilter] = useLocalStorage('filter', { query: '', shortFilm: false });
     const [filteredMovies, setFilteredMovies] = useState([]);
-    const [savedIdMovies, setSavedIdMovies] = useLocalStorage('idMovies', {});
     const [isSearched, setIsSearched] = useState(false);
-    
-    const [allMovies, setAllMovies] = useLocalStorage('movies', []);
-    const [limit, countAddedCard, onChangeLimit] = useLimit(displayWidth);
     const [errMessage, setErrMessage] = useState('');
+    const [limit, countAddedCard, onChangeLimit] = useLimit(displayWidth);
+    const [filter, setFilter] = useLocalStorage('filter', { query: '', shortFilm: false });
+    const [savedIdMovies, setSavedIdMovies] = useLocalStorage('idMovies', {});
+    const [allMovies, setAllMovies] = useLocalStorage('movies', []);
+    const [initialMovies, setInitialFilms] = useLocalStorage('beats-films', []);
 
     const [fetchMovies, isLoading] = useFetching(async () => {
 
-        await getMovies()
-            .then(res => {
-                const allFilteredFilms = filterFilms(res, filter)
-                setAllMovies(allFilteredFilms)
-                !allFilteredFilms.length && setErrMessage('Ничего не найдено')
-                setFilteredMovies(allFilteredFilms.slice(0, limit))
-                setIsSearched(true)
-            })
-            .catch((err) => {
-                console.log(`Ошибка при получении фильмов из фильмотеки ${err}`)
-                setErrMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-            });
-        
-        await api.getSavedMovies(localStorage.getItem('token'))
-            .then(res => {
-                const idMovies = res.reduce((prev, item) => {
-                    return {...prev, [item.movieId]: item._id}
-                }, {})
-                setSavedIdMovies(idMovies)
+        if (initialMovies.length) {
+            const allFilteredFilms = filterFilms(initialMovies, filter)
+            setAllMovies(allFilteredFilms)
+            setFilteredMovies(allFilteredFilms.slice(0, limit))
+        } else {
+            await getMovies()
+                .then(res => {
+                    setInitialFilms(res);
+                    const allFilteredFilms = filterFilms(res, filter);
+                    setAllMovies(allFilteredFilms);
+                    !allFilteredFilms.length && setErrMessage('Ничего не найдено');
+                    setFilteredMovies(allFilteredFilms.slice(0, limit));
+                    setIsSearched(true);
                 })
-            .catch((err) => {
-                console.log(`Ошибка при получении фильмов с сервера ${err}`)
-            });
+                .catch((err) => {
+                            console.log(`Ошибка при получении фильмов из фильмотеки ${err}`)
+                            setErrMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+                        });
+                    await api.getSavedMovies(localStorage.getItem('token'))
+                        .then(res => {
+                            const idMovies = res.reduce((prev, item) => {
+                                return {...prev, [item.movieId]: item._id}
+                            }, {})
+                            setSavedIdMovies(idMovies)
+                            })
+                        .catch((err) => {
+                            console.log(`Ошибка при получении фильмов с сервера ${err}`)
+                        });
+            }
+            
     });
     
     const handleSubmit = (e) => {
