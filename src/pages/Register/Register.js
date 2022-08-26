@@ -61,7 +61,7 @@ export const Register = ({ handleLogin }) => {
                             minLength='2'
                             maxLength='30'
                             required
-                            placeholder='Имя'
+                            placeholder='Имя: от 2 до 30 символов'
                             value={values.name || ''}
                             onChange={handleChange}
                             errorText={errors.name}
@@ -72,7 +72,7 @@ export const Register = ({ handleLogin }) => {
                             name='email'
                             type='email'
                             required
-                            placeholder='E-mail'
+                            placeholder='E-mail: в формате user@domain.com'
                             value={values.email || ''}
                             onChange={handleChange}
                             errorText={errors.email}
@@ -85,7 +85,7 @@ export const Register = ({ handleLogin }) => {
                             minLength='8'
                             maxLength='30'
                             required
-                            placeholder='Пароль'
+                            placeholder='Пароль: от 8 до 30 символов'
                             value={values.password || ''}
                             onChange={handleChange}
                             errorText={errors.password}

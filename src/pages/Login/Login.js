@@ -55,7 +55,7 @@ export const Login = ({ handleLogin }) => {
                             name='email'
                             type='email'
                             required
-                            placeholder='E-mail'
+                            placeholder='E-mail: в формате user@domain.com'
                             value={values.email || ''}
                             onChange={handleChange}
                             errorText={errors.email}
@@ -68,7 +68,7 @@ export const Login = ({ handleLogin }) => {
                             minLength='8'
                             maxLength='30'
                             required
-                            placeholder='Пароль'
+                            placeholder='Пароль: от 8 до 30 символов'
                             value={values.password || ''}
                             onChange={handleChange}
                             errorText={errors.password}
