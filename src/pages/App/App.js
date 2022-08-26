@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { LandingPage } from '../LandingPage';
 import { MoviesPage } from '../MoviesPage';
 import { SavedMoviesPage } from '../SavedMoviesPage';
@@ -16,7 +16,7 @@ const App = () => {
 
   const [loggedIn, setloggedIn] = useState(false);
 
-  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = () => {
     setloggedIn(true);
@@ -24,29 +24,27 @@ const App = () => {
 
   const [userContext, setUserContext] = useState({});
 
-  const token = localStorage.getItem('token');
-
   useEffect(() => {
-    if (token) {
-      getInfo(token).then((user) => {
-        setloggedIn(true);
-        setUserContext(user);
-      }).catch((err) => {
-        setloggedIn(false);
-        navigate('/');
-        console.error(err);
-      })
+    if (localStorage.getItem('token')) {
+      getInfo(localStorage.getItem('token'))
+        .then((user) => {
+          setUserContext(user);
+          setloggedIn(true)
+        })
+        .catch((err) => {
+          console.log(`Передан некорректный токен ${err}`);
+          setloggedIn(false);
+        })
     } else {
       setloggedIn(false);
-      navigate('/')
     }
-  }, [token]);
+  }, [loggedIn, location]);
 
   return (
     <div className='App'>
       <CurrentUserContext.Provider value={{userContext, setUserContext}}>
         <Routes>
-            <Route path='/' element={<LandingPage loggedIn={loggedIn }  />} />
+            <Route path='/' element={<LandingPage loggedIn={loggedIn}  />} />
           <Route path='/signin' element={<Login handleLogin={handleLogin}/>} />
           <Route path='/signup' element={<Register handleLogin={handleLogin}/>} />
           <Route path='*' element={<NotFound />} />
