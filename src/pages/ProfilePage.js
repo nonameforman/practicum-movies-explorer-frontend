@@ -8,9 +8,7 @@ export const ProfilePage = () => {
             <Header>
                 <MoviesNavigation />
             </Header>
-            <Profile 
-                name='Виталик'
-            />
+            <Profile />
         </>
     );
 }
