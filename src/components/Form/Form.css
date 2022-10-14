@@ -1,0 +1,13 @@
+.form__title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+    margin: 40px 0;
+}
+
+@media screen and (max-width: 767px) {
+    .form__title {
+        margin: 50px 0;
+        text-align: center;
+    }
+}

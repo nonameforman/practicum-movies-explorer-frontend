@@ -1,0 +1,19 @@
+.App {
+    background-color: #202020;
+    font-family: "Inter", "Helvetica", sans-serif;
+    color: #FFFFFF;
+    min-height: 100vh;
+    min-width: 320px;
+    margin: 0 auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.opacity:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.transition {
+    transition: 0.2s linear;
+}

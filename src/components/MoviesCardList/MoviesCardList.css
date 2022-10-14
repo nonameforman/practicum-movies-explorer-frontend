@@ -1,0 +1,51 @@
+.card-list__elements {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 360px);
+    gap: 60px 30px;
+    max-width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 70px;
+    list-style: none;
+}
+
+.cards-list__button {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+    border: none;
+    width: 1140px;
+    margin: 0 auto 80px;
+    color: white;
+    background-color: #2F2F2F;
+    padding: 10px 0;
+    border-radius: 6px;
+}
+
+@media screen and (max-width: 1279px) {
+    .card-list__elements {
+        grid-template-columns: repeat(auto-fill, 339px);
+        gap: 47px 30px;
+        max-width: 768px;
+        padding: 70px 30px;
+    }
+
+    .cards-list__button {
+        width: 708px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .card-list__elements {
+        grid-template-columns: repeat(auto-fill, 300px);
+        gap: 40px;
+        max-width: 320px;
+        padding: 40px 10px;
+    }
+
+    .cards-list__button {
+        width: 300px;
+    }
+}
