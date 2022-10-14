@@ -1,9 +1,10 @@
 # Movies-explorer-frontend  
 
-## Links  
+## Description
 
-### Pull request  
-https://github.com/nonameforman/movies-explorer-frontend/pull/2  
+Законченный дипломный проект по веб-разработке
+
+## Links  
 
 ### Frontend  
 https://movies-diplom.nomoredomains.xyz  
